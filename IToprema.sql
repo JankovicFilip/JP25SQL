@@ -1,15 +1,15 @@
-drop database if exists IToprema;
-create database IToprema character set utf8;
-use IToprema;
+drop database if exists IToprematest;
+create database IToprematest character set utf8;
+use IToprematest;
 
-# mysql -uedunova -pedunova --default_character_set=utf8 < d:\JP25\JP25SQL\IToprema.sql
+# mysql -uedunova -pedunova --default_character_set=utf8 < d:\JP25\JP25SQL\IToprematest.sql
 # između values i zagrada ne smije biti razmak u redovima
 
 
 create table shop(
     sifra int not null primary key auto_increment,
     naziv varchar(50),
-    radnik int not null
+    blagajna int not null
 );
 
     create table gpu(
@@ -56,8 +56,7 @@ create table radnik(
     ime varchar(50) not null,
     prezime varchar(50) not null,
     iban varchar(50) not null,
-    placa decimal(18,2),
-    kupac int not null
+    placa decimal(18,2)
 );
 
 create table kupac(
@@ -106,6 +105,12 @@ create table preuzece(
 );
 
 
+create table blagajna(
+    sifra int not null primary key auto_increment,
+    radnik int not null,
+    kupac int not null
+);
+
 
 
 alter table produkti add foreign key (gpu) references gpu(sifra);
@@ -114,10 +119,12 @@ alter table produkti add foreign key (ram) references ram(sifra);
 alter table produkti add foreign key (ssd) references ssd(sifra);
 alter table produkti add foreign key (napajanje) references napajanje(sifra);
 
-alter table radnik add foreign key (kupac) references kupac(sifra); 
 
 
-alter table shop add foreign key (radnik) references radnik(sifra);
+alter table shop add foreign key (blagajna) references blagajna(sifra);
+
+alter table blagajna add foreign key (radnik) references radnik(sifra);
+alter table blagajna add foreign key (kupac) references kupac(sifra);
 
 alter table kupac add foreign key (nacinplacanja) references nacinplacanja(sifra);
 alter table kupac add foreign key (produkti) references produkti(sifra);
@@ -330,19 +337,35 @@ insert into kupac (sifra,ime,prezime,nacinplacanja,produkti) values
 
 # 4-5
 
-insert into radnik (sifra,ime,prezime,iban,placa,kupac) values
-(null,'Petra','Pejić','HR9323400099727465948',5555.21,1),
-(null,'Višnja','Tomić','HR9824840084689622665',5779.21,6);
+insert into radnik (sifra,ime,prezime,iban,placa) values
+(null,'Petra','Pejić','HR9323400099727465948',5555.21),
+(null,'Višnja','Tomić','HR9824840084689622665',5779.21);
 
 
+# 1-10
 
+insert into blagajna (sifra,radnik,kupac) values
+(null,1,1),
+(null,1,2),
+(null,1,3),
+(null,1,4),
+(null,1,5),
+(null,2,6),
+(null,2,7),
+(null,2,8),
+(null,2,9),
+(null,2,10);
 
 
 # 1-2
 
-insert into shop (sifra,naziv,radnik) values
+insert into shop (sifra,naziv,blagajna) values
 (null,'PCbuilder',1),
-(null,'PCbuilder',2);
+(null,'PCbuilder',6);
+
+
+
+
 
 
 
