@@ -56,7 +56,8 @@ create table radnik(
     ime varchar(50) not null,
     prezime varchar(50) not null,
     iban varchar(50) not null,
-    placa decimal(18,2)
+    placa decimal(18,2),
+    kupac int not null
 );
 
 create table kupac(
@@ -105,10 +106,6 @@ create table preuzece(
 );
 
 
-create table blagajna(
-    radnik int not null,
-    kupac int not null
-);
 
 
 alter table produkti add foreign key (gpu) references gpu(sifra);
@@ -116,6 +113,8 @@ alter table produkti add foreign key (cpu) references cpu(sifra);
 alter table produkti add foreign key (ram) references ram(sifra);
 alter table produkti add foreign key (ssd) references ssd(sifra);
 alter table produkti add foreign key (napajanje) references napajanje(sifra);
+
+alter table radnik add foreign key (kupac) references kupac(sifra); 
 
 
 alter table shop add foreign key (radnik) references radnik(sifra);
@@ -307,6 +306,33 @@ insert into produkti (sifra,gpu,cpu,ram,ssd,napajanje) values
 
 
 
+# # 1-5 gotovina, u trgovini(false), a 6-10 kartica,dostava(true)
+
+
+insert into kupac (sifra,ime,prezime,nacinplacanja,produkti) values
+(null,'Zorka','Perković',6,1),
+(null,'Mutimir','Rukavina',7,2),
+(null,'Braslav','Stolar',8,3),
+(null,'Mato','Ivančić',9,4),
+(null,'Senka','Pavić',10,5),
+(null,'Jelena','Galić',1,6),
+(null,'Pribislav','Barišić',2,7),
+(null,'Matija','Jerković',3,8),
+(null,'Tanja','Brajković',4,9),
+(null,'Tomo','Matijević',5,10);
+
+
+
+
+
+
+
+
+# 4-5
+
+insert into radnik (sifra,ime,prezime,iban,placa,kupac) values
+(null,'Petra','Pejić','HR9323400099727465948',5555.21,1),
+(null,'Višnja','Tomić','HR9824840084689622665',5779.21,6);
 
 
 
@@ -314,30 +340,9 @@ insert into produkti (sifra,gpu,cpu,ram,ssd,napajanje) values
 
 # 1-2
 
-# insert into radnik (sifra,ime,prezime,iban,placa) values
-# (null,'Petra','Pejić','HR9323400099727465948',5555.21),
-# (null,'Višnja','Tomić','HR9824840084689622665',5779.21);
-
-
-
-# 1-5 prvi radnik, 6-10 drugi radnik
-
-# insert into blagajna(radnik,kupac) values
-# (1,1),
-# (1,2),
-# (1,3),
-# (1,4),
-# (1,5),
-# (2,6),
-# (2,7),
-# (2,8),
-# (2,9),
-# (2,10);
-
-
-
-
-
+insert into shop (sifra,naziv,radnik) values
+(null,'PCbuilder',1),
+(null,'PCbuilder',2);
 
 
 
