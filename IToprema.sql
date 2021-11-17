@@ -1,8 +1,8 @@
-drop database if exists IToprematest;
-create database IToprematest character set utf8;
-use IToprematest;
+drop database if exists IToprema;
+create database IToprema character set utf8;
+use IToprema;
 
-# mysql -uedunova -pedunova --default_character_set=utf8 < d:\JP25\JP25SQL\IToprematest.sql
+# mysql -uedunova -pedunova --default_character_set=utf8 < d:\JP25\JP25SQL\IToprema.sql
 # između values i zagrada ne smije biti razmak u redovima
 
 
