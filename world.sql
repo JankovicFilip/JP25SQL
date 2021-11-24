@@ -48,6 +48,7 @@ CREATE TABLE `City` (
 
 insert into city (ID,name,CountryCode,District,Population) values
 (9999,'Donji Miholjac','HRV','Osječko-Baranjska županija',9491);
+update city set Name='Špičkovina' where ID=9999;
 INSERT INTO `City` VALUES (1,'Kabul','AFG','Kabol',1780000);
 INSERT INTO `City` VALUES (2,'Qandahar','AFG','Qandahar',237500);
 INSERT INTO `City` VALUES (3,'Herat','AFG','Herat',186800);
