@@ -46,7 +46,7 @@ where naslov not like '%b%';
 select b.naziv  
 from katalog a inner join izdavac b on a.izdavac = b.sifra
 inner join mjesto c on a.mjesto = c.sifra
-where b.aktivan='1' and c.naziv='Zagreb';
+where b.aktivan=is null and c.naziv='Zagreb';
 
 
 
