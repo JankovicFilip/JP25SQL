@@ -35,7 +35,7 @@ alter table katalog add foreign key (mjesto) references mjesto(sifra);
 
 select a.naslov
 from katalog a inner join izdavac b on a.izdavac = b.sifra
-where b.aktivan='null';
+where b.aktivan is null;
 
 select a.naslov
 from katalog a inner join izdavac b on a.izdavac = b.sifra
